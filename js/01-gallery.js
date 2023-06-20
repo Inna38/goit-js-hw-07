@@ -5,7 +5,6 @@ const gallery = document.querySelector(".gallery");
 
 gallery.addEventListener("click", onGalleryClick);
 
-
 const markup = galleryItems
   .map(
     ({ preview, original, description }) =>
@@ -29,10 +28,8 @@ function onGalleryClick(e) {
   const currentImg = e.target.dataset.source;
 
   if (!e.target.classList.contains("gallery__image")) {
-    return
+    return;
   }
-
-  
 
   const instance = basicLightbox.create(`
     <img src="${currentImg}" width="800" height="600">
@@ -41,13 +38,9 @@ function onGalleryClick(e) {
   instance.show();
 
   gallery.addEventListener("keydown", (e) => {
-
     if (e.code === "Escape") {
       instance.close();
-      console.log(e.code);
-      return
+      return;
     }
-    
   });
 }
-
