@@ -3,11 +3,10 @@ import { galleryItems } from "./gallery-items.js";
 
 const gallery = document.querySelector(".gallery");
 
-
 gallery.addEventListener("click", onGalleryClick);
-gallery.addEventListener("keydown", onGalleryKeydown);
 
-const marcup = galleryItems
+
+const markup = galleryItems
   .map(
     ({ preview, original, description }) =>
       `<li class="gallery__item">
@@ -23,32 +22,32 @@ const marcup = galleryItems
   )
   .join("");
 
-gallery.insertAdjacentHTML("beforeend", marcup);
-
+gallery.insertAdjacentHTML("beforeend", markup);
 
 function onGalleryClick(e) {
   e.preventDefault();
   const currentImg = e.target.dataset.source;
 
-    if (e.target.classList.contains("gallery__image")) {
-    const instance = basicLightbox.create(`
+  if (!e.target.classList.contains("gallery__image")) {
+    return
+  }
+
+  
+
+  const instance = basicLightbox.create(`
     <img src="${currentImg}" width="800" height="600">
 `);
 
-    
-        instance.show();
- onGalleryKeydown(e, instance)
+  instance.show();
 
-    }
-   
-}
-
-
-function onGalleryKeydown(e, instance) {
+  gallery.addEventListener("keydown", (e) => {
 
     if (e.code === "Escape") {
-console.log("jhjhj");
-    instance.close()
-}
+      instance.close();
+      console.log(e.code);
+      return
+    }
     
+  });
 }
+
