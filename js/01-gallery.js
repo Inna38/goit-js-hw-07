@@ -31,10 +31,15 @@ function onGalleryClick(e) {
     return;
   }
 
-  const instance = basicLightbox.create(`
-    <img src="${currentImg}" width="800" height="600">
-`);
-
+  const instance = basicLightbox.create(
+    `
+ <img src="${currentImg}" width="800" height="600">
+ `,
+    {
+      onShow: (instance) => {},
+      onClose: (instance) => {},
+    }
+  );
   instance.show();
 
   gallery.addEventListener("keydown", (e) => {

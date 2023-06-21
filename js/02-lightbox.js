@@ -8,10 +8,7 @@ const markup = galleryItems
     ({ preview, original, description }) =>
       `<li class="gallery__item" >
    <a class="gallery__link" href="${original}" >
-      <img class="gallery__image" src="${preview} "data-alt="${description}" 
-      title="${description}" caption-position="top"
-        />
-      
+      <img class="gallery__image" src="${preview} "alt="${description}"/>   
    </a>
 </li>`
   )
@@ -19,7 +16,8 @@ const markup = galleryItems
 
 gallery.insertAdjacentHTML("beforeend", markup);
 
-gallery = new SimpleLightbox(".gallery a");
-gallery.on("show.simplelightbox", function () {
-  gallery.options.captionDelay = 250;
+gallery = new SimpleLightbox(".gallery a", {
+  captionDelay: 250,
+  captionsData: "alt",
+  captionPosition: "bottom",
 });
