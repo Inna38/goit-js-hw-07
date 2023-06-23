@@ -36,16 +36,17 @@ function onGalleryClick(e) {
  <img src="${currentImg}" width="800" height="600">
  `,
     {
-      onShow: (instance) => {},
-      onClose: (instance) => {},
+      onShow: (instance) => {
+        instance.element().querySelector('.gallery')
+      },
+      onClose: (instance) => {
+        gallery.addEventListener("keydown", (e) => {
+          if (e.code === "Escape") {
+            instance.close();
+          }
+        });
+      },
     }
   );
   instance.show();
-
-  gallery.addEventListener("keydown", (e) => {
-    if (e.code === "Escape") {
-      instance.close();
-      return;
-    }
-  });
 }
