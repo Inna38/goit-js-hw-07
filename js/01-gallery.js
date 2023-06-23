@@ -37,16 +37,18 @@ function onGalleryClick(e) {
  `,
     {
       onShow: (instance) => {
-        instance.element().querySelector('.gallery')
+        gallery.addEventListener("keydown", removeGalleryClick);
       },
       onClose: (instance) => {
-        gallery.addEventListener("keydown", (e) => {
-          if (e.code === "Escape") {
-            instance.close();
-          }
-        });
+        gallery.removeEventListener("keydown", removeGalleryClick);
       },
     }
   );
   instance.show();
+
+  function removeGalleryClick(e) {
+    if (e.code === "Escape") {
+      instance.close();
+    }
+  }
 }
